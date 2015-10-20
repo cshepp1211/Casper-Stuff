@@ -1,0 +1,33 @@
+#!/bin/bash
+
+SafariInfected=0
+if [[ -z `defaults read /Applications/Safari.app/Contents/Info LSEnvironment 2>&1 | grep "does not exist"` ]]; then
+    SafariInfected=1
+fi
+
+ChromeInfected=0
+if [[ -z `defaults read /Applications/Google\ Chrome.app/Contents/Info LSEnvironment 2>&1 | grep "does not exist"` ]]; then
+    ChromeInfected=1
+fi
+
+FirefoxInfected=0
+if [[ -z `defaults read /Applications/Firefox.app/Contents/Info LSEnvironment 2>&1 | grep "does not exist"` ]]; then
+    FirefoxInfected=1
+fi
+
+DyldInsertLibrariesInfected=0
+if [[ -z `defaults read ~/.MacOSX/environment DYLD_INSERT_LIBRARIES 2>&1 | grep "does not exist"` ]]; then
+    DyldInsertLibrariesInfected=1
+fi
+
+JavaUnpatched=0
+if [[ -n `which java` ]]; then
+    JavaVersion=`java -version 2>&1 | grep "java version" | awk '{print $3}'`
+    JavaVersionNumber=`echo $JavaVersion | sed -e "s/[\"\._]//g"`
+    if [[ $JavaVersionNumber -lt 16031 ]]; then
+        JavaUnpatched=1
+    else
+        JavaUnpatched=0
+    fi
+fi
+echo "<result>Safari:$SafariInfected,Chrome:$ChromeInfected,FireFox:$FirefoxInfected,DyldLibraries:$DyldInsertLibrariesInfected,JavaUnpatched:$JavaUnpatched</result>"

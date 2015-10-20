@@ -1,4 +1,4 @@
-# hello-world
-My first GitHub Repository
+# Read Me
+Collection of Casper scripts, Extension Attributes and workflows.  Please feel free to re-use or share.
 
-I like hiking, camping, computers and coffee.  Tacos and sushi are among some of my favorite foods.  Socks, wooden spoons and watches are amongsts my likes.
+Chris

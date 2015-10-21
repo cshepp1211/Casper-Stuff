@@ -311,7 +311,7 @@ def main():
         if type(results) == types.DictType:
             results = [results]
         warranty_dicts.extend(results)
-    plain_format = "<result>"
+    plain_format = ""
     for result in warranty_dicts:
         plain_format += "%s: %s\n" % (u'SERIAL_ID', result[u'SERIAL_ID'])
         plain_format += "%s: %s\n" % (u'PROD_DESCR', result[u'PROD_DESCR'])
@@ -319,23 +319,14 @@ def main():
             if (key not in (u'SERIAL_ID', u'PROD_DESCR', u'ERROR_CODE')):
                 plain_format += "%s: %s\n" % (key, val)
         #plain_format += "%s: %s\n\n" % (u'ERROR_CODE', result[u'ERROR_CODE'])
-        plain_format += "</result>"
-    sys.stdout.write(plain_format)
     
     response = os.popen('"{filename}" -startlaunchd -windowType utility -icon "{icon}" -title "{title}" -heading "{heading}" -description "{description}" -button1 "Ok"'.format(
-        description='NEED OUTPUT HERE',
+        description=plain_format,
         filename='/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper',
         heading='',
         icon='/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/ToolbarCustomizeIcon.icns',
         title='Computer Warranty Status'
     )).read()
-    if response == 0:
-        installUpdates()
-    else:
-        print "Something went wrong with the jamfHelper.  Fix it."
-        attempts = 7
-        logData(attempts)
-        exit(1)
 
 if __name__ == "__main__":
     main()

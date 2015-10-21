@@ -16,7 +16,7 @@
 
 ######
 #
-# Completely borrowed from @Mikeymikey, pudquick@github
+# Borrowed from @Mikeymikey, pudquick@github
 #
 # This works as an Extension Attribute for Casper
 #

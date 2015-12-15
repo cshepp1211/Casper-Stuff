@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Chris Sheppard
+# Script to check for Matlab network license
+# 2015-12-07
+
+app="MATLAB"
+
+if result=`cat /Applications/MATLAB_*.app/licenses/*.lic`; then
+echo "<result>$result</result>"
+else
+    echo "<result>Not Installed</result>"
+fi
+

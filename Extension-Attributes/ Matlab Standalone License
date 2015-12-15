@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Chris Sheppard
+# Script to check for Matlab standalone license
+# 2015-12-07
+
+LicensePath=$(find /Users/*/.matlab -type d -name "*_licenses")
+
+if license=`cat "$LicensePath"/*.lic`; then
+	echo "<result>$license</result>"
+else
+	echo "<result>Not Installed</result>"
+fi
